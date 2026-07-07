@@ -18,30 +18,38 @@
         > </template
       > <v-card
         > <v-list
-          class="bots-list"
+          class="bots-list-container"
           density="compact"
           :selected="favorited"
           select-strategy="classic"
           nav
-          > <v-list-item
-            v-for="(bot, index) in shownBots"
-            :key="index"
-            :value="bot.getClassname()"
-            color="primary"
-            @click="toggleFavorite(bot)"
-            > <template v-slot:prepend="{ isActive }"
-              > <v-list-item-action start
-                > <v-checkbox-btn
-                  color="primary"
-                  :model-value="isActive"
-                ></v-checkbox-btn
-                > </v-list-item-action
-              > </template
-            > <v-list-item-title
-              > <BotLogo :bot="bot" active="true" size="24"></BotLogo>&nbsp;
-              <span>{{ bot.getFullname() }}</span
-              > </v-list-item-title
-            > </v-list-item
+          > <template v-for="group in groupedBots" :key="group.brand"
+            > <v-list-subheader class="provider-header"
+              > {{ group.brand }} </v-list-subheader
+            >
+            <div class="bots-list">
+               <v-list-item
+                v-for="bot in group.bots"
+                :key="bot.getClassname()"
+                :value="bot.getClassname()"
+                color="primary"
+                @click="toggleFavorite(bot)"
+                > <template v-slot:prepend="{ isActive }"
+                  > <v-list-item-action start
+                    > <v-checkbox-btn
+                      color="primary"
+                      :model-value="isActive"
+                    ></v-checkbox-btn
+                    > </v-list-item-action
+                  > </template
+                > <v-list-item-title
+                  > <BotLogo :bot="bot" active="true" size="24"></BotLogo>&nbsp;
+                  <span>{{ bot.getFullname() }}</span
+                  > </v-list-item-title
+                > </v-list-item
+              >
+            </div>
+             </template
           > </v-list
         > <v-divider></v-divider> <v-list
           > <v-list-item
@@ -90,6 +98,24 @@ const selectedTags = ref([]);
 const notDisabledBots = bots.all.filter((bot) => !bot.isDisabled());
 const shownBots = ref(notDisabledBots);
 
+// Group the shown bots into provider sections, keyed by the localized brand
+// name. Groups appear in the order their first bot shows up in shownBots.
+const groupedBots = computed(() => {
+  const groups = [];
+  const byBrand = new Map();
+  for (const bot of shownBots.value) {
+    const brand = bot.getBrandName();
+    let group = byBrand.get(brand);
+    if (!group) {
+      group = { brand, bots: [] };
+      byBrand.set(brand, group);
+      groups.push(group);
+    }
+    group.bots.push(bot);
+  }
+  return groups;
+});
+
 const toggleFavorite = (bot) => {
   const classname = bot.getClassname();
   if (favorited.value.includes(classname)) {
@@ -126,6 +152,14 @@ defineExpose({
 </script>
 
 <style>
+/* Provider section header spans the full menu width. */
+.provider-header {
+  padding-inline: 8px;
+  font-weight: 700;
+  opacity: 0.9;
+}
+
+/* Bots within a provider section are laid out in compact columns. */
 .bots-list {
   column-count: 3;
 }
