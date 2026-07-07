@@ -344,7 +344,8 @@ body {
 header {
   width: 100%;
   background-color: rgb(var(--v-theme-header));
-  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  box-shadow: none;
+  border-bottom: 1px solid rgba(var(--v-theme-outline-variant), 0.6);
   padding: 16px;
   z-index: 999;
 }

@@ -1,0 +1,80 @@
+/*
+ * Material 3 Expressive foundation.
+ * Layered on top of Vuetify's M3 base: motion, type, shape and elevation
+ * tweaks that give the app the expressive feel (springy motion, rounder
+ * shapes, bolder type, softer tonal elevation).
+ */
+
+:root {
+  /* M3 emphasized easing + expressive durations */
+  --m3-ease-emphasized: cubic-bezier(0.2, 0, 0, 1);
+  --m3-ease-emphasized-decel: cubic-bezier(0.05, 0.7, 0.1, 1);
+  --m3-ease-standard: cubic-bezier(0.2, 0, 0, 1);
+  --m3-duration-short: 200ms;
+  --m3-duration-medium: 350ms;
+  /* Expressive shape scale */
+  --m3-radius-large: 24px;
+  --m3-radius-xl: 28px;
+}
+
+/* Expressive type: a modern, slightly bolder system stack */
+.v-application {
+  font-family:
+    "Segoe UI Variable Text",
+    "Segoe UI",
+    Roboto,
+    system-ui,
+    -apple-system,
+    "Helvetica Neue",
+    Arial,
+    sans-serif;
+  letter-spacing: 0;
+}
+
+/* Emphasized, springy motion on the interactive surfaces */
+.v-btn,
+.v-list-item,
+.v-switch .v-selection-control__wrapper,
+.v-overlay__content,
+.v-navigation-drawer,
+.v-slide-y-transition-enter-active,
+.v-slide-y-transition-leave-active {
+  transition-timing-function: var(--m3-ease-emphasized) !important;
+}
+
+/* Expressive buttons: bolder, roomier, generous corners */
+.v-btn {
+  font-weight: 600;
+  letter-spacing: 0.1px;
+}
+.v-btn.v-btn--size-default {
+  min-height: 42px;
+}
+/* A subtle lift on hover for that expressive, tactile feel */
+.v-btn:not(.v-btn--icon):hover {
+  transform: translateY(-1px);
+}
+
+/* Toolbar / titles a touch more expressive */
+.v-toolbar-title {
+  font-weight: 600;
+}
+
+/* Flat, tonal app bar - the harsh drop shadow is replaced by a hairline */
+.v-app-bar.v-toolbar {
+  box-shadow: none !important;
+}
+
+/* Softer, more diffuse tonal elevation for floating surfaces (menus, dialogs) */
+.v-menu > .v-overlay__content > .v-card,
+.v-menu > .v-overlay__content > .v-list {
+  box-shadow:
+    0 2px 6px rgba(0, 0, 0, 0.08),
+    0 10px 28px rgba(0, 0, 0, 0.12) !important;
+  border-radius: var(--m3-radius-xl) !important;
+}
+
+/* Expressive switches pick up the primary tone */
+.v-switch__track {
+  opacity: 1;
+}

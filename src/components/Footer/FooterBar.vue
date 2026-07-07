@@ -509,13 +509,14 @@ textarea::placeholder {
 }
 
 .send-prompt-btn {
-  height: 40px !important;
+  height: 44px !important;
   margin: 0.4rem !important;
-  text-transform: uppercase !important;
+  text-transform: none !important;
+  font-weight: 600;
   font-size: small !important;
   color: rgb(var(--v-theme-on-primary));
   background-color: rgb(var(--v-theme-primary));
-  border-radius: 4px !important;
+  border-radius: 22px !important;
 }
 
 :deep() .v-field.v-field--appended {

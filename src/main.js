@@ -13,6 +13,7 @@ import { resolveTheme, applyTheme } from "./theme";
 
 // Vuetify
 import "vuetify/styles";
+import "@/assets/m3-expressive.css";
 import { createVuetify } from "vuetify";
 import * as components from "vuetify/components";
 import * as directives from "vuetify/directives";
@@ -63,39 +64,126 @@ const vuetify = createVuetify({
   theme: {
     defaultTheme,
     themes: {
+      // Material 3 Expressive - light scheme (violet primary, rose tertiary)
       light: {
+        dark: false,
         colors: {
-          primary: "#062AAA",
-          surface: "#FFFFFF",
-          background: "#f3f3f3",
-          "surface-variant": "#fff",
-          "on-surface-variant": "#212121",
-          header: "#fff",
-          prompt: "#95ec69",
-          response: "#fff",
-          font: "#212121",
-          "table-tr-2n": "#F6F8FA",
-          "code-font": "#476582",
-          "code-background": "#F3F4F4",
+          primary: "#6750A4",
+          "on-primary": "#FFFFFF",
+          "primary-container": "#E9DDFF",
+          "on-primary-container": "#22005D",
+          secondary: "#625B71",
+          "on-secondary": "#FFFFFF",
+          "secondary-container": "#E8DEF8",
+          "on-secondary-container": "#1E192B",
+          tertiary: "#B3306E",
+          "on-tertiary": "#FFFFFF",
+          "tertiary-container": "#FFD9E2",
+          "on-tertiary-container": "#3E001D",
+          error: "#BA1A1A",
+          "on-error": "#FFFFFF",
+          "error-container": "#FFDAD6",
+          "on-error-container": "#410002",
+          background: "#FEF7FF",
+          "on-background": "#1D1B20",
+          surface: "#FEF7FF",
+          "on-surface": "#1D1B20",
+          "surface-variant": "#E7E0EB",
+          "on-surface-variant": "#49454E",
+          "surface-bright": "#FEF7FF",
+          "surface-container-lowest": "#FFFFFF",
+          "surface-container-low": "#F7F2FA",
+          "surface-container": "#F3EDF7",
+          "surface-container-high": "#ECE6F0",
+          "surface-container-highest": "#E6E0E9",
+          outline: "#79747E",
+          "outline-variant": "#CAC4D0",
+          // App-specific tokens mapped onto the M3 surfaces / roles
+          header: "#F7F2FA",
+          prompt: "#E9DDFF",
+          response: "#F7F2FA",
+          font: "#1D1B20",
+          "table-tr-2n": "#F3EDF7",
+          "code-font": "#5B4B8A",
+          "code-background": "#F3EDF7",
         },
       },
+      // Material 3 Expressive - dark scheme
       dark: {
         dark: true,
         colors: {
-          primary: "#ececf1",
-          surface: "#292a2d",
-          background: "#1a1a20",
-          "surface-variant": "#131419",
-          "on-surface-variant": "#fff",
-          header: "#292a2d",
-          prompt: "#222329",
-          response: "#131419",
-          font: "#fff",
-          "table-tr-2n": "#1d1e20",
-          "code-font": "#cbdae6",
-          "code-background": "#292a2d",
+          primary: "#D0BCFF",
+          "on-primary": "#381E72",
+          "primary-container": "#4F378A",
+          "on-primary-container": "#E9DDFF",
+          secondary: "#CCC2DC",
+          "on-secondary": "#332D41",
+          "secondary-container": "#4A4458",
+          "on-secondary-container": "#E8DEF8",
+          tertiary: "#FFB0C8",
+          "on-tertiary": "#5E1133",
+          "tertiary-container": "#7B2949",
+          "on-tertiary-container": "#FFD9E2",
+          error: "#FFB4AB",
+          "on-error": "#690005",
+          "error-container": "#93000A",
+          "on-error-container": "#FFDAD6",
+          background: "#141218",
+          "on-background": "#E6E0E9",
+          surface: "#141218",
+          "on-surface": "#E6E0E9",
+          "surface-variant": "#49454E",
+          "on-surface-variant": "#CAC4D0",
+          "surface-bright": "#3B383E",
+          "surface-container-lowest": "#0F0D13",
+          "surface-container-low": "#1D1B20",
+          "surface-container": "#211F26",
+          "surface-container-high": "#2B2930",
+          "surface-container-highest": "#36343B",
+          outline: "#938F99",
+          "outline-variant": "#49454E",
+          // App-specific tokens mapped onto the M3 surfaces / roles
+          header: "#211F26",
+          prompt: "#4F378A",
+          response: "#211F26",
+          font: "#E6E0E9",
+          "table-tr-2n": "#2B2930",
+          "code-font": "#D0BCFF",
+          "code-background": "#211F26",
         },
       },
+    },
+  },
+  defaults: {
+    // Material 3 Expressive shape: rounder, pill-shaped controls
+    VBtn: {
+      rounded: "pill",
+      class: "text-none",
+    },
+    VCard: {
+      rounded: "xl",
+    },
+    VChip: {
+      rounded: "pill",
+    },
+    VList: {
+      rounded: "lg",
+    },
+    VTextField: {
+      rounded: "lg",
+    },
+    VTextarea: {
+      rounded: "lg",
+    },
+    VSelect: {
+      rounded: "lg",
+    },
+    VSwitch: {
+      inset: true,
+      color: "primary",
+    },
+    VAppBar: {
+      flat: true,
     },
   },
 });

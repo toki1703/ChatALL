@@ -42,7 +42,7 @@ onMounted(() => {
 
 <style scoped>
 .message {
-  border-radius: 8px;
+  border-radius: 20px;
   padding: 16px;
   word-wrap: break-word;
   text-align: left;
@@ -50,6 +50,9 @@ onMounted(() => {
 
 .prompt {
   background-color: rgb(var(--v-theme-prompt));
+  color: rgb(var(--v-theme-on-primary-container));
+  /* Expressive M3 bubble: rounded with a tighter tail corner */
+  border-radius: 20px 20px 20px 6px;
   width: fit-content;
   grid-column: 1 / span var(--columns);
 }

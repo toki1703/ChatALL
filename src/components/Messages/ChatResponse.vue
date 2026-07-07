@@ -514,7 +514,7 @@ function pageRight() {
 }
 
 .message {
-  border-radius: 8px;
+  border-radius: 20px;
   padding: 16px;
   word-wrap: break-word;
   text-align: left;
@@ -526,6 +526,8 @@ function pageRight() {
 
 .prompt {
   background-color: rgb(var(--v-theme-prompt));
+  color: rgb(var(--v-theme-on-primary-container));
+  border-radius: 20px 20px 20px 6px;
   width: fit-content;
   grid-column: 1 / span var(--columns);
 }
@@ -537,12 +539,14 @@ function pageRight() {
 
 .response {
   background-color: rgb(var(--v-theme-response));
+  border-radius: 20px 20px 20px 6px;
   width: 100%;
   grid-column: auto / span 1;
 }
 
 .response-thread {
   background-color: rgb(var(--v-theme-response));
+  border-radius: 18px;
   width: 99%;
   grid-column: auto / span 1;
   margin: auto;
