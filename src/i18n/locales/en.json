@@ -15,7 +15,10 @@
     "light": "Light",
     "dark": "Dark",
     "bots": "AI Bots",
-    "showMenuBar": "Show Menu Bar"
+    "showMenuBar": "Show Menu Bar",
+    "providers": "Providers",
+    "providersPrompt": "Models from a disabled provider are hidden from the model picker.",
+    "providerModelCount": "{count} models"
   },
   "common": {
     "apiKey": "API Key"

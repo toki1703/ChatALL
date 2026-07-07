@@ -151,6 +151,9 @@ export default createStore({
       isShowMenuBar: true,
       isShowAppBar: true,
     },
+    // Brand ids (providers) that the user has switched off. Their bots are
+    // hidden from the model picker.
+    disabledProviders: [],
   },
   mutations: {
     changeColumns(state, n) {
@@ -320,6 +323,15 @@ export default createStore({
     },
     setGeneral(state, values) {
       state.general = { ...state.general, ...values };
+    },
+    setProviderEnabled(state, { brandId, enabled }) {
+      const disabled = new Set(state.disabledProviders);
+      if (enabled) {
+        disabled.delete(brandId);
+      } else {
+        disabled.add(brandId);
+      }
+      state.disabledProviders = [...disabled];
     },
     createChat(state) {
       const { favBots } = state.chats[state.currentChatIndex];

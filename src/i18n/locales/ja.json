@@ -15,7 +15,10 @@
     "light": "ライト",
     "dark": "ダーク",
     "bots": "AIボット",
-    "showMenuBar": "メニューバーを表示"
+    "showMenuBar": "メニューバーを表示",
+    "providers": "プロバイダー",
+    "providersPrompt": "無効にしたプロバイダーのモデルは、モデル選択メニューに表示されません。",
+    "providerModelCount": "{count} モデル"
   },
   "common": {
     "apiKey": "APIキー"

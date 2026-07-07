@@ -18,6 +18,7 @@
               > <v-tab value="general">{{ $t("settings.general") }}</v-tab
               > <v-tab value="proxy">{{ $t("proxy.name") }}</v-tab
               > <v-tab value="chat">{{ $t("chat.name") }}</v-tab
+              > <v-tab value="providers">{{ $t("settings.providers") }}</v-tab
               > <v-tab
                 v-for="(setting, index) in botSettings"
                 :key="index"
@@ -70,6 +71,10 @@
               <div v-if="tab == 'chat'">
                  <component :is="chat" @close-dialog="closeDialog"></component>
               </div>
+
+              <div v-if="tab == 'providers'">
+                 <ProviderSettings></ProviderSettings>
+              </div>
                <template v-for="(setting, index) in botSettings" :key="index"
                 > <component
                   v-if="tab == index"
@@ -95,6 +100,7 @@ import { Type } from "@/components/BotSettings/settings.const";
 
 import ProxySettings from "@/components/ProxySetting.vue";
 import ChatSettings from "@/components/ChatSetting.vue";
+import ProviderSettings from "@/components/ProviderSettings.vue";
 import CommonBotSettings from "@/components/BotSettings/CommonBotSettings.vue";
 
 import ChatGPTBotSettings from "@/components/BotSettings/ChatGPTBotSettings.vue";

@@ -63,7 +63,6 @@
                 group
                 variant="outlined"
                 rounded="xl"
-                @update:model-value="filterBots($event)"
                 > <v-btn v-for="(tag, index) in tags" :key="index" :value="tag"
                   > {{ $t(`footer.${tag}`) }} </v-btn
                 > </v-btn-toggle
@@ -95,8 +94,30 @@ const favorited = computed(() => {
 const tags = Object.keys(botTags);
 const selectedTags = ref([]);
 
-const notDisabledBots = bots.all.filter((bot) => !bot.isDisabled());
-const shownBots = ref(notDisabledBots);
+// Bots that are neither disabled at the class level nor belong to a provider
+// the user has switched off in the settings.
+const availableBots = computed(() =>
+  bots.all.filter(
+    (bot) =>
+      !bot.isDisabled() &&
+      !store.state.disabledProviders.includes(bot.getBrandId()),
+  ),
+);
+
+// The tag toggle is single-select, so the value can be a string or empty.
+const activeTags = computed(() => {
+  const selected = selectedTags.value;
+  if (!selected) return [];
+  return Array.isArray(selected) ? selected : [selected];
+});
+
+const shownBots = computed(() => {
+  const tagBotLists = activeTags.value.map((tag) => botTags[tag]);
+  if (!tagBotLists.length) return availableBots.value;
+  return availableBots.value.filter((bot) =>
+    tagBotLists.every((tagBots) => tagBots.includes(bot)),
+  );
+});
 
 // Group the shown bots into provider sections, keyed by the localized brand
 // name. Groups appear in the order their first bot shows up in shownBots.
@@ -127,23 +148,6 @@ const toggleFavorite = (bot) => {
 
 function toggleMenu() {
   menu.value = !menu.value;
-}
-
-function filterBots(selectedTags) {
-  let filteredIn = notDisabledBots;
-
-  // If the toggle is not multi-select, the selectedTags will be a string
-  if (typeof selectedTags === "string") {
-    selectedTags = [selectedTags];
-  }
-
-  if (selectedTags?.length) {
-    const tagBots = selectedTags.map((tag) => botTags[tag]);
-    filteredIn = filteredIn.filter((bot) => {
-      return tagBots.every((tagBot) => tagBot.includes(bot));
-    });
-  }
-  shownBots.value = filteredIn;
 }
 
 defineExpose({

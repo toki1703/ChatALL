@@ -33,6 +33,10 @@ export default class Bot {
     return this.constructor._isDarkLogo;
   }
 
+  getBrandId() {
+    return this.constructor._brandId;
+  }
+
   getBrandName() {
     const c = this.constructor;
     return i18n.global.t(`${c._brandId}.name`);
