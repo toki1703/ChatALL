@@ -2,6 +2,27 @@ const { defineConfig } = require("@vue/cli-service");
 
 module.exports = defineConfig({
   transpileDependencies: ["vuetify"],
+  chainWebpack: (config) => {
+    // vue-cli inlines the whole `process.env` object as a literal via
+    // DefinePlugin. That turns a wholesale assignment such as
+    // `process.env = previousEnv` (used by cohere-ai's aws-utils.js) into
+    // `({...}) = previousEnv`, an "Invalid left-hand side in assignment"
+    // syntax error that breaks bundling. Redefine `process.env` per key so a
+    // bare `process.env` stays a real, assignable runtime reference while the
+    // individual `process.env.X` lookups are still inlined.
+    config.plugin("define").tap((args) => {
+      const def = args[0];
+      const env = def["process.env"];
+      if (env && typeof env === "object") {
+        // Values are already DefinePlugin code strings (e.g. '"development"').
+        delete def["process.env"];
+        for (const [key, value] of Object.entries(env)) {
+          def[`process.env.${key}`] = value;
+        }
+      }
+      return args;
+    });
+  },
   pluginOptions: {
     electronBuilder: {
       builderOptions: {
